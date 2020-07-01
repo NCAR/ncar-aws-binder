@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.envrc
+.terraform
+*.tfstate*
+lock.json
+kubeconfig*
+example/
