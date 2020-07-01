@@ -1,6 +1,6 @@
 # NCAR's BinderHub on AWS
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/terraform?label=deploy&logo=terraform&style=for-the-badge)](https://github.com/NCAR/ncar-aws-binder/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/Terraform?label=deploy&logo=terraform&style=for-the-badge)](https://github.com/NCAR/ncar-aws-binder/actions)
 
 Deployment of NCAR binderhub infrastructure on AWS with terraform
 
