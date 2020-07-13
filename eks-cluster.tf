@@ -6,11 +6,16 @@ module "eks" {
   cluster_version = "1.17"
   worker_groups = [
     {
-      name                 = "${var.cluster_name}-${random_string.suffix.result}-worker-group"
+      name                 = "${var.cluster_name}-worker-group"
       instance_type        = "t2.micro"
       asg_desired_capacity = 2
       asg_max_capacity     = 4
       asg_min_capacity     = 2
+      tags = [{
+        key                 = "app"
+        propagate_at_launch = "true"
+        value = "binder" },
+      ]
     }
   ]
 
@@ -36,5 +41,5 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   token                  = data.aws_eks_cluster_auth.cluster.token
   load_config_file       = false
-  version                = "~>1.10"
+  version                = "~>1.11"
 }
