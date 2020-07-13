@@ -12,32 +12,18 @@ module "vpc" {
   single_nat_gateway   = true
   enable_dns_hostnames = true
 
-}
+  tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+  }
 
-output "private_subnets" {
-  value       = module.vpc.private_subnets
-  description = "List of IDs of private subnets"
-}
+  public_subnet_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/elb"                    = "1"
+  }
 
-output "public_subnets" {
-  value       = module.vpc.public_subnets
-  description = "List of IDs of public subnets"
-}
+  private_subnet_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/internal-elb"           = "1"
+  }
 
-output "vpc_id" {
-  value       = module.vpc.vpc_id
-  description = "The ID of the VPC"
-}
-
-output "default_security_group_id" {
-
-  value       = module.vpc.default_security_group_id
-  description = "The ID of the security group created by default on VPC creation"
-
-}
-
-
-output "default_vpc_default_security_group_id" {
-  value       = module.vpc.default_vpc_default_security_group_id
-  description = "The ID of the security group created by default on VPC creation"
 }
