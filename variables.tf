@@ -3,7 +3,9 @@ variable "region" {
   description = "AWS region"
 }
 
-variable "eks_cluster_name" {
-  default     = "ncar-hub"
+
+
+variable "cluster_name" {
+  default     = "ncar-binder-aws"
   description = "Name of our cluster"
 }

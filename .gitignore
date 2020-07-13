@@ -133,3 +133,4 @@ dmypy.json
 lock.json
 kubeconfig*
 example/
+playground/
