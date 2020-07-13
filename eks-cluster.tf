@@ -1,16 +1,16 @@
 module "eks" {
-  source       = "terraform-aws-modules/eks/aws"
-  cluster_name = var.cluster_name
-  subnets      = module.vpc.private_subnets
-  vpc_id       = module.vpc.vpc_id
-  node_groups = [
+  source          = "terraform-aws-modules/eks/aws"
+  cluster_name    = var.cluster_name
+  subnets         = module.vpc.private_subnets
+  vpc_id          = module.vpc.vpc_id
+  cluster_version = "1.17"
+  worker_groups = [
     {
-      name          = "${var.cluster_name}-worker"
-      instance_type = "t2.micro"
-
-      node_group_desired_capacity = 2
-      node_group_max_capacity     = 4
-      node_group_min_capacity     = 2
+      name                 = "${var.cluster_name}-${random_string.suffix.result}-worker-group"
+      instance_type        = "t2.micro"
+      asg_desired_capacity = 2
+      asg_max_capacity     = 4
+      asg_min_capacity     = 2
     }
   ]
 
@@ -24,6 +24,11 @@ data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
 
+
+resource "random_string" "suffix" {
+  length  = 8
+  special = false
+}
 
 
 provider "kubernetes" {
