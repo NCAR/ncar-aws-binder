@@ -1,21 +1,30 @@
+module "eks" {
+  source       = "terraform-aws-modules/eks/aws"
+  cluster_name = var.cluster_name
+  subnets      = module.vpc.private_subnets
+  vpc_id       = module.vpc.vpc_id
+  node_groups = [
+    {
+      name          = "${var.cluster_name}-worker"
+      instance_type = "t2.micro"
 
-// Retrieve Created Roles. To be used later
-data "aws_iam_role" "eks_cluster_role" {
-  name = "eksClusterRole"
+      node_group_desired_capacity = 2
+      node_group_max_capacity     = 4
+      node_group_min_capacity     = 2
+    }
+  ]
+
 }
 
-data "aws_iam_role" "node_instance_role" {
-  name = "NodeInstanceRole"
+data "aws_eks_cluster" "cluster" {
+  name = module.eks.cluster_id
 }
 
-resource "aws_eks_cluster" "binder" {
-  name     = var.cluster_name
-  role_arn = data.aws_iam_role.eks_cluster_role.arn
-
-  vpc_config {
-    subnet_ids = concat(module.vpc.private_subnets, module.vpc.public_subnets)
-  }
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks.cluster_id
 }
+
+
 
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
