@@ -134,3 +134,4 @@ lock.json
 kubeconfig*
 example/
 playground/
+deployments/ncar-hub/secrets/
