@@ -17,4 +17,4 @@ map_users = [{
 ]
 
 # prefix for resources in this infrastructure
-name_prefix = "ncar-"
+name_prefix = "ncar-binder"
