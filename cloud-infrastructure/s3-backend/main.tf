@@ -1,8 +1,5 @@
 # Create S3 + DynamoDB for remote terraform state
 # =======================
-terraform {
-  required_version = ">= 0.12.0"
-}
 
 # After first terraform apply, store state in S3 by uncommenting, and re-running `terraform init`
 # variables not allowed in backend config, so you must manually enter bucket, region, table
@@ -18,11 +15,6 @@ terraform {
 #  }
 #}
 
-provider "aws" {
-  version = "~> 2.40"
-  profile = var.profile
-  region  = var.region
-}
 
 data "aws_caller_identity" "current" {}
 

@@ -2,11 +2,6 @@
 # The minimal policy set is found here:
 # https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/docs/iam-permissions.md
 # Here are a few implementations
-provider "aws" {
-  version = "2.59.0"
-  region  = var.region
-  profile = var.profile
-}
 
 # Create a new user named terraform-bot
 # Create policy in IAM and attach to terraform-bot

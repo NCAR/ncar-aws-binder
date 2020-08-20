@@ -1,11 +1,11 @@
-variable "profile" {
-  default = "default"
-}
+# variable "profile" {
+#   default = "default"
+# }
 
-variable "region" {
-  default = "us-west-2"
-}
+# variable "region" {
+#   default = "us-west-2"
+# }
 
-variable "name_prefix" {
-  default = ""
-}
+# variable "name_prefix" {
+#   default = ""
+# }

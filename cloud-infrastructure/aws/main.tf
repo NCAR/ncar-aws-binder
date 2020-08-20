@@ -1,23 +1,4 @@
-terraform {
-  required_version = ">= 0.12.6"
 
-  backend "s3" {
-    bucket  = "ohw-terraform-state-bucket"
-    key     = "ohw-cluster-config.tfstate"
-    region  = "us-west-2"
-    encrypt = true
-  }
-}
-
-provider "aws" {
-  version = "2.59.0"
-  region  = var.region
-  profile = var.profile
-}
-
-provider "template" {
-  version = "~> 2.1"
-}
 
 data "aws_caller_identity" "current" {}
 
