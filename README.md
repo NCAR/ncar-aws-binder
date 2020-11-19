@@ -33,8 +33,8 @@ Adding `terraform-state` and `infastructure`
 ## Deployment
 
 [jhub-infra-badge]: https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/Jupyterhub%20Infrastructure?label=deploy&logo=terraform&style=for-the-badge
-[jhub-infra-link]: TODO
+[jhub-infra-link]: https://github.com/NCAR/ncar-aws-binder/actions?query=workflow%3A%22Jupyterhub+Infrastructure%22
 [docker-build-badge]: https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/Docker%20Image%20Build?logo=docker&style=for-the-badge
-[docker-build-link]: TODO
+[docker-build-link]: https://github.com/NCAR/ncar-aws-binder/actions?query=workflow%3A%22Docker+Image+Build%22
 [qhub-update-badge]: https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/qhub%20auto%20update?label=qhub-update&style=for-the-badge
-[qhub-update-link]: TODO
+[qhub-update-link]: https://github.com/NCAR/ncar-aws-binder/actions?query=workflow%3A%22qhub+auto+update%22
