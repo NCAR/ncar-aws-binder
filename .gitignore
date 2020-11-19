@@ -8,5 +8,4 @@ terraform.tfstate.backup
 __pycache__
 .vscode/
 .envrc
-qhub-config-old.yaml
-qhub-config-local.yaml
+qhub-config.yaml
