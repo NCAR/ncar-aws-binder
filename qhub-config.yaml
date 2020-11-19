@@ -7,8 +7,8 @@ security:
   authentication:
     type: GitHub
     config:
-      client_id: CLIENT_ID
-      client_secret: CLIENT_SECRET
+      client_id: e37ebe9973fdca4e62d3
+      client_secret: d81e314beb412dcaaca88f78fbdc2a13e66b833a
       oauth_callback_url: https://jupyter.ncar-aws-hub.andersonbanihirwe.dev/hub/oauth_callback
   users:
     andersy005:
