@@ -1,73 +1,40 @@
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/Terraform?label=deploy&logo=terraform&style=for-the-badge)](https://github.com/NCAR/ncar-aws-binder/actions)
+# NCAR's JupyterHub Infrastructure on AWS
 
-# NCAR's BinderHub on AWS
+| JupyterHub Infrastructure |    [![GitHub Workflow Status][jhub-infra-badge]][jhub-infra-link]     |
+| :------------------------ | :-------------------------------------------------------------------: |
+| **Docker Image Build**    | [![Docker Image Build Status][docker-build-badge]][docker-build-link] |
+| **qhub Auto Update**      |   [![qhub Auto Update Status][qhub-update-badge]][qhub-update-link]   |
 
-- [NCAR's BinderHub on AWS](#ncars-binderhub-on-aws)
-  - [Modules](#modules)
-  - [Usage](#usage)
-    - [Initialize Terraform workspace](#initialize-terraform-workspace)
-    - [Provision the EKS cluster](#provision-the-eks-cluster)
-    - [Configure `kubectl`](#configure-kubectl)
+This guide is intended to show how to deploy and maintain a jupyterhub
+cluster along with its related components. Infastructure as code is
+used, via GitHub Actions and Terraform, such that this repository will
+always reflect the exact state of the cluster. Advantages of this
+infrastructure as code approach:
 
-Deployment of NCAR binderhub infrastructure on AWS with terraform
+- reduce the requirements for developers on their machines
+- restrict modifications to infrastructure
+- enable review of infastructure changes
+- allow arbitrary users to request infrastructure changes
 
-## Modules
+In practice GitHub Actions controls everything.
 
-- `versions.tf`: sets the Terraform version to at least 0.12. It also sets versions for the providers used.
-- `variables.tf`: defines variables used throughout the configuration.
-- `outputs.tf`: defines the output configuration.
-- `vpc.tf` provisions a VPC, subnets and availability zones using the [AWS VPC Module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws). A new VPC is created for our cluster so it doesn't impact the default cloud environment and resources
-- `eks-cluster.tf` provisions all the resources (AutoScaling Groups, etc...) required to set up an EKS cluster in the private subnets and bastion servers to access the cluster using the [AWS EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws).
+## Dependencies
 
-## Usage
+- [awscli](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+- [aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [helm](https://helm.sh/) version **3+**
+- [terraform](https://www.terraform.io/downloads.html) version **v0.13.4**
 
-### Initialize Terraform workspace
+## Development
 
-From the root directory of this repo, run `terraform init` to initialize your Terraform workspace:
+Adding `terraform-state` and `infastructure`
 
-```bash
-$ terraform init
-Initializing modules...
+## Deployment
 
-Initializing the backend...
-
-Initializing provider plugins...
-
-Terraform has been successfully initialized!
-```
-
-### Provision the EKS cluster
-
-Run terraform apply and review the planned actions.
-
-```bash
-$ terraform apply
-module.eks.data.aws_ami.eks_worker_windows: Refreshing state...
-module.eks.data.aws_caller_identity.current: Refreshing state...
-module.vpc.aws_vpc.this[0]: Refreshing state... [id=vpc-0b69df476ca797204]
-module.eks.data.aws_ami.eks_worker: Refreshing state...
-module.eks.data.aws_partition.current: Refreshing state...
-module.eks.data.aws_iam_policy_document.cluster_assume_role_policy: Refreshing state...
-module.vpc.aws_eip.nat[0]: Refreshing state... [id=eipalloc-0bbf940a0a77d3a43]
-module.eks.data.aws_iam_policy_document.workers_assume_role_policy: Refreshing state...
-module.eks.aws_iam_role.cluster[0]: Refreshing state... [id=ncar-binder-aws20200713145136611700000001]
-module.eks.aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy[0]: Refreshing state...
-...
-...
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: yes
-...
-```
-
-This step takes around 12-15 minutes. Upon successful cluster provisioning, the outputs defined in `outputs.tf` will be printed in the terminal.
-
-### Configure `kubectl`
-
-To configure `kubectl`, you will need to look find the cluster name in the outputs, and pass this name to `aws eks` command:
-
-```bash
-$ aws eks --region us-west-2 update-kubeconfig --name ncar-binder-aws
-```
+[jhub-infra-badge]: https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/Jupyterhub%20Infrastructure?label=deploy&logo=terraform&style=for-the-badge
+[jhub-infra-link]: TODO
+[docker-build-badge]: https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/Docker%20Image%20Build?logo=docker&style=for-the-badge
+[docker-build-link]: TODO
+[qhub-update-badge]: https://img.shields.io/github/workflow/status/NCAR/ncar-aws-binder/qhub%20auto%20update?label=qhub-update&style=for-the-badge
+[qhub-update-link]: TODO
