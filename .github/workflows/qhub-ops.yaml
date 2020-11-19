@@ -28,8 +28,8 @@ jobs:
           qhub render -c qhub-config.yaml -o ./ -f
       - name: Push Changes
         run: |
-          git config user.email "qhub@quansight.com"
-          git config user.name "github action"
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action[bot]"
           git add .
           # only commit and push if we have changes
           git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push origin master)
