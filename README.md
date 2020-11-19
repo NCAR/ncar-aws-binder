@@ -1,4 +1,4 @@
-# NCAR-AWS-Hub Infrastructure
+# NCAR's JupyterHub Infrastructure on AWS
 
 | JupyterHub Infrastructure |    [![GitHub Workflow Status][jhub-infra-badge]][jhub-infra-link]     |
 | :------------------------ | :-------------------------------------------------------------------: |
